@@ -17,3 +17,4 @@ Shared docs: https://notes.sjtu.edu.cn/-ycbHcSLRWudRbF4s6faGw
   * More... about the design of logger
 
 - [ ] a friendly user interface
+  - [ ]  command line interface
