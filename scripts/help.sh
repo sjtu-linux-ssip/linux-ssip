@@ -1,0 +1,8 @@
+echo "\033[36;1mLinux-SSIP Helper for Linux Kernel v5.4.0 ...\033[0m"
+echo "\033[35m-  make\033[0m\t\tInstall Linux-SSIP (also \033[35mmake install\033[0m)"
+echo "\033[35m-  make clean\033[0m\tUninstall Linux-SSIP (also \033[35mmake uninstall\033[0m)"
+echo "\033[35m-  make start\033[0m\tLaunch Linux-SSIP daemons and kernel modules"
+echo "\033[35m-  make stop\033[0m\tTerminate Linux-SSIP daemons and kernel modules"
+echo "\033[35m-  make ui\033[0m\tLaunch Linux-SSIP UI"
+echo "\033[35m-  make test\033[0m\tTest Linux-SSIP user-mode part"
+echo "\033[35m-  make help\033[0m\tPrint this help message"
