@@ -7,7 +7,7 @@
 
 int main() {
     nl_socket nl_kill;
-    nl_init(KILL_SUBDAEMON_PORT, &nl_kill);
+    nl_init(KILL_DAEMON_PORT, &nl_kill);
     kill_msg kill_msg;
     rule_db rule_db;
     logger logger_kill;

@@ -7,7 +7,7 @@
 
 int main() {
     nl_socket nl_unlink;
-    nl_init(UNLINK_SUBDAEMON_PORT, &nl_unlink);
+    nl_init(UNLINK_DAEMON_PORT, &nl_unlink);
     unlink_msg unlink_msg;
     rule_db rule_db;
     logger logger_unlink;
