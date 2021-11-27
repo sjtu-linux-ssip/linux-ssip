@@ -25,7 +25,8 @@ int main() {
             // deny the operation
             nl_send(DENY_MSG, &nl_kill);
             char message[LOG_LEN];
-            sprintf(message, "protect process %d from killed by ...", kill_msg.pid);
+            sprintf(message, "protect process %d from killed by user(uid: %d), group(gid: %d)",
+                kill_msg.pid, kill_msg.uid, kill_msg.gid);
             logging(&logger_kill, time(NULL), LOG_LEVEL_DANGER, message);
         }
     }

@@ -24,8 +24,16 @@ int main() {
         } else {
             // deny the operation
             nl_send(DENY_MSG, &nl_write);
+            // only allow write using vim
+            int k = strlen(write_msg.filename) - 4;
+            write_msg.filename[k--] = '\0';
+            while (k >= 0 && write_msg.filename[k] != '/') { k--; } k++;
+            while (write_msg.filename[++k] != '\0') { write_msg.filename[k-1] = write_msg.filename[k]; }
+            write_msg.filename[k-1] = '\0';
+            // end
             char message[LOG_LEN];
-            sprintf(message, "protect file %s from written by ...", write_msg.filename);
+            sprintf(message, "protect file %s from written by user(uid: %d), group(gid: %d)",
+                write_msg.filename, write_msg.uid, write_msg.gid);
             logging(&logger_write, time(NULL), LOG_LEVEL_DANGER, message);
         }
     }

@@ -25,7 +25,8 @@ int main() {
             // deny the operation
             nl_send(DENY_MSG, &nl_unlink);
             char message[LOG_LEN];
-            sprintf(message, "protect file %s from deleted by ...", unlink_msg.filename);
+            sprintf(message, "protect file %s from deleted by user(uid: %d), group(gid: %d)",
+                unlink_msg.filename, unlink_msg.uid, unlink_msg.gid);
             logging(&logger_unlink, time(NULL), LOG_LEVEL_DANGER, message);
         }
     }
