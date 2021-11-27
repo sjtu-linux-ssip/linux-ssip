@@ -7,7 +7,8 @@
 
 int main() {
     nl_socket nl_write;
-    nl_init(WRITE_DAEMON_PORT, &nl_write);
+    nl_init(WRITE_DAEMON_PORT, &nl_write, WRITE_NETLINK_FAMILY);
+    nl_send(HELLO_MSG, &nl_write);
     write_msg write_msg;
     rule_db rule_db;
     logger logger_write;

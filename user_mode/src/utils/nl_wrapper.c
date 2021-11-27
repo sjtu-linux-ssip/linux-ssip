@@ -4,10 +4,10 @@
 
 #include <utils/nl_wrapper.h>
 
-void nl_init(int port, nl_socket *nl) {
+void nl_init(int port, nl_socket *nl, int nl_family) {
     nl->nlh = NULL;
     nl->port_id = port;
-    nl->skfd = socket(AF_NETLINK, SOCK_RAW, NETLINK_USERSOCK);
+    nl->skfd = socket(AF_NETLINK, SOCK_RAW, nl_family);
     if (nl->skfd == -1) {
         // perror("create socket error\n");
         return;
@@ -30,10 +30,6 @@ void nl_init(int port, nl_socket *nl) {
     (nl->daddr).nl_family = AF_NETLINK;
     (nl->daddr).nl_pid = 0;
     (nl->daddr).nl_groups = 0;
-}
-
-void nl_recv(nl_socket *nl) {
-    // printf("recv begin\n");
 
     nl->nlh = (struct nlmsghdr *)malloc(NLMSG_SPACE(MAX_PLOAD));
     memset(nl->nlh, 0, sizeof(struct nlmsghdr));
@@ -42,6 +38,10 @@ void nl_recv(nl_socket *nl) {
     nl->nlh->nlmsg_type = 0;
     nl->nlh->nlmsg_seq = 0;
     nl->nlh->nlmsg_pid = (nl->saddr).nl_pid;
+}
+
+void nl_recv(nl_socket *nl) {
+    // printf("recv begin\n");
 
     memset(&(nl->u_info), 0, sizeof(nl->u_info));
     nl->len = sizeof(struct sockaddr_nl);

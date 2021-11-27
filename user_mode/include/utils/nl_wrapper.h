@@ -33,7 +33,7 @@ typedef struct {
     int port_id;
 } nl_socket;
 
-void nl_init(int port, nl_socket *nl);
+void nl_init(int port, nl_socket *nl, int nl_family);
 void nl_recv(nl_socket *nl);
 void nl_send(char *msg, nl_socket *nl);
 void nl_close(nl_socket *nl);

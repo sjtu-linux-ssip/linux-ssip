@@ -17,6 +17,7 @@ MODULE_DESCRIPTION("a loadable kernel module to hook `sys_unlinkat`, for linux k
 #define ALLOW_MSG '1'
 #define DENY_MSG '0'
 #define UNLINK_PARSE_FORMAT "%d#%d#%s"
+#define UNLINK_NETLINK_FAMILY 30
 
 typedef struct {
     char* msg;
@@ -55,7 +56,7 @@ int send_nl_msg(char *pbuf, uint16_t len) {
     }
 
     /* set netlink message header */
-    nlh = nlmsg_put(nl_skb, 0, 0, NETLINK_USERSOCK, len, 0);
+    nlh = nlmsg_put(nl_skb, 0, 0, UNLINK_NETLINK_FAMILY, len, 0);
     if (nlh == NULL) {
         printk("nlmsg_put failaure \n");
         nlmsg_free(nl_skb);
@@ -176,7 +177,7 @@ static int __init mod_sys_unlinkat_hook_init(void) {
 	set_pte_atomic(pte, pte_clear_flags(*pte, _PAGE_RW));
 
 	// create netlink socket
-	nlsk = (struct sock *)netlink_kernel_create(&init_net, NETLINK_USERSOCK, &cfg);
+	nlsk = (struct sock *)netlink_kernel_create(&init_net, UNLINK_NETLINK_FAMILY, &cfg);
 
 	if (nlsk == NULL) {
 		printk("netlink create error!\n");
