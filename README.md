@@ -3,13 +3,6 @@ Our Team -- Zihan Liu, Jinhao Li, Shanqing Qi, and Zichao Xia.
 
 Project For SJTU-IS415: System Software Course Design
 
-### TODO
-
-- [ ] Joint test for the whole software combining the user-mode and kernel-mode
-  * Multiple netlink module BUG: https://github.com/sjtu-linux-ssip/linux-ssip/issues/3
-- [ ] Integrity protection for specific important programs such as firewall
-- [ ] Final presentation and project report
-
 ### Usage
 
 * Prerequisites
@@ -24,23 +17,37 @@ Project For SJTU-IS415: System Software Course Design
   git clone https://github.com/sjtu-linux-ssip/linux-ssip.git
   cd linux-ssip
   # `make help` for detailed usage
-  make
-  make test   # (optional) run tests for user-mode 
+  make        # install
+  make test   # (optional) run user-mode tests 
   ```
 
 * Launch
 
   ```shell
-  make start  # NOTE that kernel modules have a BUG (issue 3)
+  make start  # start service
   make ui     # launch command line interface
   ```
 
 * Terminate
 
   ```shell
-  make stop
-  make clean
+  make stop   # stop service
+  make clean  # uninstall
   ```
+
+* Notes
+
+  * For rule database, we adopt white-list strategy. That is, the user or group can only be allowed to tamper something (e.g. kill a process, write or delete a file), rather than being refused to do something. This greatly limits the permission of the user or group, and guarantees the integrity of the system.
+
+  * When the user is allowed to write or delete a file, he or she can only perform like this:
+
+    ```shell
+    >> vim /home/zihan/Desktop/file.txt  # vim <absolute path>
+    >> rm /home/zihan/Desktop/file.txt   # rm <absolute path>
+    >> vim file.txt                      # still NOT allowed, MUST provide absolute path
+                                         # match the file path in the rule database
+    >> rm file.txt                       # still NOT allowed
+    ```
 
 ### License
 
