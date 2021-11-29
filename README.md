@@ -3,6 +3,10 @@ Our Team -- Zihan Liu, Jinhao Li, Shanqing Qi, and Zichao Xia.
 
 Project For SJTU-IS415: System Software Course Design
 
+### Architecture
+
+![arch_ssip](imgs/arch_ssip.png)
+
 ### Usage
 
 * Prerequisites
@@ -49,11 +53,10 @@ Project For SJTU-IS415: System Software Course Design
     >> rm file.txt                       # still NOT allowed
     ```
 
+### Our awesome UI 🤩
+
+![ui_ssip](imgs/ui_ssip.png)
+
 ### License
 
 [ GPL-3.0 License](https://github.com/sjtu-linux-ssip/linux-ssip/blob/main/LICENSE)
-
-### Our awesome UI 🤩
-
-![ui_ssip](ui_ssip.png)
-
